@@ -15,9 +15,10 @@ public class respawnManager : MonoBehaviour
     {
         if (collision.tag == "Respawn")
         {
-            
             currentRespawnLocation = collision.transform;
         }
+
+        
 
         if (collision.tag == "deathTrap")
         {
@@ -25,7 +26,7 @@ public class respawnManager : MonoBehaviour
         }
     }
 
-    void respawnPlayer()
+    public void respawnPlayer()
     {
         Debug.Log("Respawn");
         transform.position = currentRespawnLocation.position;
