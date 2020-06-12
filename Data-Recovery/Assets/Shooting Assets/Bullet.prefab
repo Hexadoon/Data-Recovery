@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2891199951509194154}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   travelSpeed: 20
-  destroyTimer: 4
 --- !u!60 &2891199951509194154
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -144,8 +143,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.49400002, y: 0.23400001}
-      - {x: -0.49400002, y: -0.21400002}
+    - - {x: 0.24309258, y: 0.2322173}
+      - {x: 0.2494743, y: 0.22775523}
+      - {x: 0.24628364, y: -0.21756549}
       - {x: 0.29177794, y: -0.21934819}
       - {x: 0.4963816, y: -0.0050420663}
       - {x: 0.4868088, y: 0.0098225605}

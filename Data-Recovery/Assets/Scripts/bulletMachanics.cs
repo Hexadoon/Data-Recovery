@@ -5,22 +5,29 @@ using UnityEngine;
 public class bulletMachanics : MonoBehaviour
 {
     public float travelSpeed = 20f;
-    public float destroyTimer = 4f;
+    public float damage = 50f;
+    float delayTimer = 0.2f;
    
     void Start(){
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
-        Destroy(this, destroyTimer);
+        //SDestroy(this, destroyTimer);
     }
 
     void Update(){
         
     }
-
-    void OnTriggerEnter2D(Collider2D hitInfo){
-        if(hitInfo.tag != "Respawn")
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag != "Respawn")
         {
-            Destroy(gameObject);
-
+            gameObject.GetComponent<Rigidbody2D>().velocity = transform.right*0f;
+            //add bullet impact animation here
+            Invoke("destoryObject", delayTimer);
         }
+    }
+
+    void destoryObject()
+    {
+        Destroy(gameObject);
     }
 }
