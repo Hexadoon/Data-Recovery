@@ -7,14 +7,23 @@ public class CharacterMovement : MonoBehaviour {
     public float movementSpeed = 5f;
     public float jumpForce = 5f;
     bool grounded = false;
+    bool pointRight = true;
     void Start(){
         
     }
 
     // Update is called once per frame
     void Update(){
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * movementSpeed;
+        float movementValue = Input.GetAxis("Horizontal");
+        if(pointRight && movementValue < 0){
+            flip();
+        }
+        if (!pointRight && movementValue > 0)
+        {
+            flip();
+        }
+        Vector3 horizontalMovement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        transform.position += horizontalMovement * Time.deltaTime * movementSpeed;
         if (Input.GetButtonDown("Jump") && grounded)
             {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
@@ -26,9 +35,13 @@ public class CharacterMovement : MonoBehaviour {
         }
     }
     private void OnCollisionExit2D(Collision2D collision){
-        if (collision.collider.tag == "Ground")
-        {
+        if (collision.collider.tag == "Ground"){
             grounded = false;
         }
+    }
+
+    private void flip(){
+        pointRight = !pointRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
