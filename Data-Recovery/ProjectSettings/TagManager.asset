@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - deathTrap
   - Bullet
-  - Enemy
   layers:
   - Default
   - TransparentFX
