@@ -11,16 +11,25 @@ public class scoringManager : MonoBehaviour
     public Text livesDisplay;
     public float playerHealth = 250;
     float currentHealth;
-    public float playerLives = 5;
+    public float playerLives = 6;
     public float respawnDelay;
+    public float score = 0;
     respawnManager respawnScript;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
+
+        if (Score == null) {
+          Debug.Log("score oogabooga");
+          this.enabled = false;
+          return;
+        }
+        Score.text = "Score: " + score;
         healthDisplay.text = "Health: " + playerHealth;
         livesDisplay.text = "Lives: " + playerLives;
+        //Lives = GetComponent<Text>();
         currentHealth = playerHealth;
         respawnScript = gameObject.GetComponent<respawnManager>();
 
@@ -46,7 +55,16 @@ public class scoringManager : MonoBehaviour
     void respawnPlayer()
     {
         playerLives--;
+        Debug.Log("playerLives = " + playerLives);
+
+        if (livesDisplay == null) {
+          Debug.Log("livesdisplay is junk");
+          this.enabled = false;
+          return;
+        }
+        Score.text = "Score: " + score;
         livesDisplay.text = "Lives: " + playerLives;
+        //Lives.text = "Lives: " + playerLives;
         currentHealth = playerHealth;
         respawnScript.respawnPlayer();
 
@@ -57,4 +75,5 @@ public class scoringManager : MonoBehaviour
         currentHealth -= 300;
         healthDisplay.text = "Health: " + playerHealth;
     }
+
 }
