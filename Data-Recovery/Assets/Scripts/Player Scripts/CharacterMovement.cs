@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour {
     bool grounded = false;
     bool pointRight = true;
     void Start(){
-        
+
     }
 
     // Update is called once per frame
@@ -30,6 +30,8 @@ public class CharacterMovement : MonoBehaviour {
         }
     }
     private void OnCollisionEnter2D(Collision2D collision){
+      
+      Debug.Log(collision.collider.tag);
         if(collision.collider.tag == "Ground"){
             grounded = true;
         }
