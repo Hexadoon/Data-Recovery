@@ -9,16 +9,16 @@ public class Shooting : MonoBehaviour
     public GameObject bulletObject;
 
     private void Start(){
-        
+
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            bulletObject.layer = 9;
             Instantiate(bulletObject, spawnLocation.position, spawnLocation.rotation);
         }
     }
-    
-}
 
+}
