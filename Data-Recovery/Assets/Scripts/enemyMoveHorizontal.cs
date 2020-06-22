@@ -7,21 +7,31 @@ public class enemyMoveHorizontal : MonoBehaviour{
     public float travelSpeed;
     bool right = true;
     public float health = 50;
+    public float maxDistance;
+    float minDistance;
+    float currentDistance;
     void Start(){
-        gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
+        minDistance = gameObject.transform.position.x;
+        maxDistance = maxDistance + minDistance;
 
+        gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
     }
 
     void Update(){
-        
+        currentDistance = gameObject.transform.position.x;
+        if (currentDistance >= maxDistance && right == true)
+        {
+            flip();
+        }
+        if (currentDistance <= minDistance && right == false)
+        {
+            flip();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Respawn")
-        {
-            flip();
-        }
+        
         if(collision.tag == "Bullet")
         {
             Debug.Log("Bullet Hit");
@@ -40,14 +50,12 @@ public class enemyMoveHorizontal : MonoBehaviour{
         right = !right;
         if(right == true)
         {
-            transform.Rotate(0f, -180f, 0f);
             gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
         }
 
         if(right == false)
         {
-            transform.Rotate(0f, 180f, 0f);
-            gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
+            gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * -travelSpeed;
         }
     }
 }
