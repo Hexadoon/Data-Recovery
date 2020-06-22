@@ -18,8 +18,8 @@
 
 ### Setup
 
-- Include what is needed to install software and how to install it
-[GitHub](http://github.com)
+- The .exe file can be found 
+[here](https://github.com/Hexadoon/Data-Recovery/tree/master/Data-Recovery/CurrentGame)
 
 ## Features
 
