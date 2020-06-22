@@ -19,6 +19,7 @@
 ### Setup
 
 - Include what is needed to install software and how to install it
+[GitHub](http://github.com)
 
 ## Features
 
