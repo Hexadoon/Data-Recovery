@@ -21,7 +21,7 @@ public class enemyMoveVertical : MonoBehaviour
 
     void Update()
     {
-        currentHeight = gameObject.transform.position.y + minHeight;
+        currentHeight = gameObject.transform.position.y - minHeight;
         if (currentHeight >= maxHeight && goingUp == true )
         {
             flip();

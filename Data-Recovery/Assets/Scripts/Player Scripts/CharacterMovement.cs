@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour {
     bool grounded = false;
     bool pointRight = true;
     void Start(){
-        
+
     }
 
     // Update is called once per frame
@@ -24,19 +24,23 @@ public class CharacterMovement : MonoBehaviour {
         }
         Vector3 horizontalMovement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += horizontalMovement * Time.deltaTime * movementSpeed;
-        if (Input.GetButtonDown("Jump") && grounded)
-            {
+        if (Input.GetButtonDown("Jump") && grounded){
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
+            Debug.Log("jump");
         }
     }
     private void OnCollisionEnter2D(Collision2D collision){
+      
+      Debug.Log(collision.collider.tag);
         if(collision.collider.tag == "Ground"){
             grounded = true;
+            Debug.Log("grounded");
         }
     }
     private void OnCollisionExit2D(Collision2D collision){
         if (collision.collider.tag == "Ground"){
             grounded = false;
+            Debug.Log("not grounded");
         }
     }
 
