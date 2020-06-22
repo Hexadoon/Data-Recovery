@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyMoveVertical : MonoBehaviour
+public class boss : enemyBehavior
 {
-    public float travelSpeed;
     bool goingUp = true;
-    public float health = 100;
     public float maxHeight;
     float minHeight;
     float currentHeight;
+
+    // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
+        health = 100;
         minHeight = gameObject.transform.position.y;
         maxHeight = maxHeight + minHeight;
 
@@ -19,9 +21,10 @@ public class enemyMoveVertical : MonoBehaviour
 
     }
 
+
     void Update()
     {
-        currentHeight = gameObject.transform.position.y - minHeight;
+        currentHeight = gameObject.transform.position.y + minHeight;
         if (currentHeight >= maxHeight && goingUp == true )
         {
             flip();
@@ -32,10 +35,11 @@ public class enemyMoveVertical : MonoBehaviour
         }
     }
 
+/**
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.tag == "Bullet")
+
+        if (collision.tag == "Bullet" && collision.gameObject.layer != 8)
         {
             Debug.Log("Bullet Hit");
             bulletMachanics projectileScript = collision.GetComponent<bulletMachanics>();
@@ -48,7 +52,8 @@ public class enemyMoveVertical : MonoBehaviour
             }
         }
     }
-    private void flip()
+    **/
+    public void flip()
     {
         goingUp = !goingUp;
         if (goingUp == true)
