@@ -16,6 +16,11 @@ public class followPlayer : MonoBehaviour
         if (playerX > mapStartingPoint && playerX < mapEndPoint){
             transform.position = new Vector3(player.position.x + offset.x, transform.position.y, transform.position.z);
         }
-        
+
+        if (playerX <= mapStartingPoint)
+        {
+            transform.position = new Vector3(mapStartingPoint, transform.position.y, transform.position.z);
+        }
+
     }
 }
