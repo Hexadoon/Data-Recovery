@@ -1,6 +1,11 @@
 # Data-Recovery
 
-- Concept Statement
+## Concept Statement
+
+You awake to find yourself in a strange, futuristic city unsure of where you are or how you got there. As you begin to put the pieces of your past together, you are accused of doing something you can’t remember and are forced to go on the run as you avoid police bots and assassins who have been sent to kill you. Will you be able to uncover the truth of your past, or will you be consumed by the city?
+
+Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player must fight through different parts of a dystopian, futuristic city to gradually reveal the story. Explore the world to find new abilities to help defeat bosses and unlock access to new areas. The gameplay is inspired by shoot-em-ups of the ’90s including Mega Man and Contra. 
+
 
 - Picture of game
 
@@ -11,41 +16,55 @@
 - Features
 - Developers
 
-
 ### Installation
-
-- Provide EXE file
-
-### Setup
 
 - The .exe file can be found 
 [here](https://github.com/Hexadoon/Data-Recovery/tree/master/Data-Recovery/CurrentGame)
 
+## Setup
+
 ## Features
 
-### Gameplay Controls
+### Movement Controls
 
-- Movement Controls
-- Station Controls
-- Inventory
+D - Move Right
 
-### Menus & Sound
+A - Move Left
+
+Space - Jump
+
+Left Click - Shoot
+
+### Menu
 
 - Start Menu
+
+- Pause Menu
+
 - End Menu
-- Pause
-- Sound
+
+### Enemies
+
+- Basic Enemies
+
+- Boss
+
+- Obstacles
 
 ## Developers
 
 ### Software Developers
 
-- Include pictures and names
+Akash
+
+Maggie
 
 ### Graphic Artist
 
-- Include picture and name
+Mike
 
 ### Project Managers
 
-- Include pictures and names
+Ryan
+
+Nick
