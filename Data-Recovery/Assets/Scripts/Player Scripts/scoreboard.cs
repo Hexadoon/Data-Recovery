@@ -9,54 +9,44 @@ public class scoreboard : MonoBehaviour
     public Text Score;
     public Text healthDisplay;
     public Text livesDisplay;
-    /**
-    public float playerHealth = 250;
-    float currentHealth;
-    public float playerLives = 6;
-    public float respawnDelay;
-    public float score = 0;
-    **/
-    int playerHealth, currentHealth;
-    int playerLives;
+
+    float health;
+    float lives;
     float score;
-    //public GameObject player = null;
-    public Character player = null;
-    //respawnManager respawnScript;
+    Character player;
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        if (player == null){
-          player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-          //player = (Character)FindObjectOfType(Character);
-        }
-        //Debug.Log(player);
-        float[] stats = player.getStats();
-        playerHealth = (int) stats[0];
-        playerLives = (int) stats[1];
-        score = stats[2];
+    void Start(){
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        health = player.playerHealth;
+        lives = player.playerLives;
+        score = player.score;
 
         Score.text = "Score: " + score;
-        healthDisplay.text = "Health: " + playerHealth;
-        livesDisplay.text = "Lives: " + playerLives;
-        //Lives = GetComponent<Text>();
-        //currentHealth = playerHealth;
-        //respawnScript = gameObject.GetComponent<respawnManager>();
+        healthDisplay.text = "Health: " + health;
+        livesDisplay.text = "Lives: " + lives;
 
     }
 
     // Update is called once per frame
-    void Update()
+    public void updateHealth()
     {
-      float[] stats = player.getStats();
-      playerHealth = (int) stats[0];
-      playerLives = (int) stats[1];
-      score = stats[2];
+        health = player.playerHealth;
+        healthDisplay.text = "Health: " + health;
+    }
 
-      Score.text = "Score: " + score;
-      healthDisplay.text = "Health: " + playerHealth;
-      livesDisplay.text = "Lives: " + playerLives;
+    public void updateLives()
+    {
+        lives = player.playerLives;
+        livesDisplay.text = "Lives: " + lives;
+    }
+
+    public void updateScore()
+    {
+        score = player.score;
+        Score.text = "Score: " + score;
     }
 
 }

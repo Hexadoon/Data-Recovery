@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public LayerMask playerMask;
+    scoreboard scoreManager;
 
     //movement
     public float movementSpeed = 5f;
@@ -14,8 +15,8 @@ public class Character : MonoBehaviour
 
 
     //combat
-    public float playerHealth = 250;
-    float currentHealth;
+    public int playerHealth;
+    int defaultHealth;
     public float playerLives;
     public float score = 0;
     public Transform bulletSpawn;
@@ -27,11 +28,18 @@ public class Character : MonoBehaviour
     public Transform initialLocation;
     public float respawnDelay;
 
+    //Animations
+    Animator playerAnimations;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-      currentRespawnLocation = initialLocation;
-      currentHealth = playerHealth;
+        currentRespawnLocation = initialLocation;
+        defaultHealth = playerHealth;
+        playerAnimations = gameObject.GetComponent<Animator>();
+        scoreManager = gameObject.GetComponent<scoreboard>();
 
     }
 
@@ -45,28 +53,61 @@ public class Character : MonoBehaviour
         {
             flip();
         }
+        float horizontal = Input.GetAxis("Horizontal");
         Vector3 horizontalMovement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        if (horizontal != 0)
+        {
+            playerAnimations.SetBool("runPlayer", true);
+            
+            playerAnimations.SetFloat("runSpeed", Mathf.Abs(Mathf.Pow(horizontal,2)));
+        }
+        else
+        {
+            playerAnimations.SetBool("runPlayer", false);
+            playerAnimations.SetFloat("runSpeed", 0);
+        }
         transform.position += horizontalMovement * Time.deltaTime * movementSpeed;
-        if (Input.GetButtonDown("Jump") && grounded)
-            {
+        if (Input.GetButtonDown("Jump") && grounded){
+            playerAnimations.SetBool("runPlayer", false);
+            playerAnimations.SetFloat("runSpeed", 0);
+            playerAnimations.SetTrigger("jumpPlayer");
+
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
+            
         }
 
         if (Input.GetButtonDown("Fire1"))
         {
             bulletObject.layer = 9;
+            playerAnimations.SetTrigger("aimPlayer");
             Instantiate(bulletObject, bulletSpawn.position, bulletSpawn.rotation);
+
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision){
+   
 
-        if(collision.collider.tag == "Ground"){
-            grounded = true;
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ground")
+        {
+            //Debug.Log("Not Grounded");
+            grounded = false;
+            playerAnimations.SetBool("exitJump", false);
+
         }
-
     }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Ground")
+        {
+            //Debug.Log("Grounded");
+
+            grounded = true;
+            playerAnimations.SetBool("exitJump",true);
+
+        }
         if (collision.tag == "Respawn")
         {
             currentRespawnLocation = collision.transform;
@@ -79,54 +120,61 @@ public class Character : MonoBehaviour
         }
         if(collision.tag == "Enemy")
         {
-            getHitByenemy();
+            getHitByenemy(defaultHealth);
         }
 
         if(collision.tag == "Bullet")
         {
-            if (collision.gameObject.layer != 9){
-              bulletMachanics projectileScript = collision.GetComponent<bulletMachanics>();
-              float damageOccured = projectileScript.damage;
-              currentHealth -= damageOccured;
-              Destroy(collision.gameObject);
-              if (currentHealth <= 0)
-              {
-                playerLives--;
-                Invoke("respawnPlayer", 2f);
-              }
+            if (collision.gameObject.layer != 9)
+            {
+
+                bulletMachanics projectileScript = collision.GetComponent<bulletMachanics>();
+                float damageOccured = projectileScript.damage;
+                Destroy(collision.gameObject);
+                getHitByenemy(damageOccured);
+                
             }
+            
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision){
-        if (collision.collider.tag == "Ground"){
-            grounded = false;
-        }
-    }
+    
 
     private void flip(){
         pointRight = !pointRight;
         transform.Rotate(0f, 180f, 0f);
     }
-    public float[] getStats() {
-      float[] stat = {currentHealth, playerLives, score};
-   
-      return stat;
-    }
-    void getHitByenemy()
+
+    void getHitByenemy(float damage)
     {
-        currentHealth -= 300;
-        if (currentHealth <= 0)
+        playerHealth -=(int) damage;
+        Debug.Log(playerHealth);
+        scoreManager.updateHealth();
+        if (playerHealth <= 0)
         {
+            gameObject.SetActive(false);
             playerLives--;
+            scoreManager.updateLives();
+
+            playerHealth = defaultHealth;
             Invoke("respawnPlayer", 2f);
         }
     }
+
+    public void getKill()
+    {
+        score++;
+        scoreManager.updateScore();
+
+    }
     void respawnPlayer()
     {
-        Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
-        currentHealth = playerHealth;
+        playerHealth = defaultHealth; 
+        scoreManager.updateHealth();
+
+        gameObject.SetActive(true);
+
 
     }
 }
