@@ -145,7 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  health: 50
+  playerProfile: {fileID: 0}
+  health: 5
   travelSpeed: 2.5
   MaxDist: 10
   MinDist: 8
@@ -153,6 +154,7 @@ MonoBehaviour:
   spawnLocation: {fileID: 6681466163444635402}
   bulletObject: {fileID: 7956310840729624720, guid: dcc73ed6b39edc54588f53f65ef81749,
     type: 3}
+  maxDistance: 0
 --- !u!1 &6681466163444635381
 GameObject:
   m_ObjectHideFlags: 0
