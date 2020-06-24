@@ -15,7 +15,7 @@ public class peon : enemyBehavior{
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
         playerProfile = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
 
-        health = 50;
+        health = 5;
         minDistance = gameObject.transform.position.x;
         maxDistance = maxDistance + minDistance;
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
