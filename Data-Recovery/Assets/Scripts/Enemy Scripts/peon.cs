@@ -10,6 +10,12 @@ public class peon : enemyBehavior{
     float minDistance;
     float currentDistance;
 
+    Transform myTrans;
+    float distToGround;
+
+
+    public LayerMask groundLayer;
+
 
     void Start(){
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
@@ -19,13 +25,28 @@ public class peon : enemyBehavior{
         minDistance = gameObject.transform.position.x;
         maxDistance = maxDistance + minDistance;
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
+
         timeBtwShots = 0;
     }
 
+    void FixedUpdate() {
+      //Vector2 lineCastPos = myTrans.position - myTrans.right * myWidth;
+      //Debug.DrawLine(lineCastPos, lineCastPos + Vector2.down);
+      //bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, (float) (distToGround + 0.1));
+
+      //if (!isGrounded) {
+      //  flip();
+      //}
+    }
     void Update(){
+
         float distance = Mathf.Abs(transform.position.x - Player.position.x);
         float ydistance = Mathf.Abs(transform.position.y - Player.position.y);
 
+
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.green, 2.0f);
 
         currentDistance = gameObject.transform.position.x;
         if (currentDistance >= maxDistance && right == true)
@@ -58,6 +79,20 @@ public class peon : enemyBehavior{
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
         }
+    }
+
+    bool IsGrounded() {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
+
+        Debug.DrawRay(position, direction, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if (hit.collider != null) {
+            return true;
+        }
+
+        return false;
     }
 
     public void flip()
