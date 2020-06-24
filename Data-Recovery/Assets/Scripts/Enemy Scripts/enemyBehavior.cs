@@ -13,6 +13,8 @@ public abstract class enemyBehavior : MonoBehaviour
     public int MinDist = 20;
 
 
+    //public LayerMask enemyMask;
+
 
     //public float fireRate;
     //public float nextFire;
@@ -27,6 +29,7 @@ public abstract class enemyBehavior : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
         Debug.Log(Player);
+
     }
 
     // Update is called once per frame
@@ -48,30 +51,14 @@ public abstract class enemyBehavior : MonoBehaviour
         }
     }
     **/
-
+    /**
     void Update() {
 
     }
-
+**/
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        /**
-        if(collision.tag == "Bullet" && collision.gameObject.layer != 8)
-        {
-          Debug.Log(collision.gameObject.layer);
-            Debug.Log("Bullet Hit");
-            bulletMachanics projectileScript = collision.GetComponent<bulletMachanics>();
-            float damageOccured = projectileScript.damage;
-            health -= damageOccured;
-
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-        **/
         if(collision.tag == "Bullet")
         {
             Debug.Log(collision.gameObject.layer);

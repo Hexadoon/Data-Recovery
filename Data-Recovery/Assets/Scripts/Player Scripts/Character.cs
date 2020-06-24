@@ -6,12 +6,15 @@ public class Character : MonoBehaviour
 {
     public LayerMask playerMask;
 
+    public followPlayer cam_follow;
+    public boss boss;
     //movement
     public float movementSpeed = 5f;
     public float jumpForce = 5f;
     bool grounded = false;
     bool pointRight = true;
 
+    bool at_boss = false;
 
     //combat
     public float playerHealth = 250;
@@ -27,12 +30,24 @@ public class Character : MonoBehaviour
     public Transform initialLocation;
     public float respawnDelay;
 
+    //other
+    public HealthBar healthBar;
+    //public Rigidbody2D bossEnter;
+    //public Rigidbody2D bossExit;
+
     // Start is called before the first frame update
     void Start()
     {
       currentRespawnLocation = initialLocation;
       currentHealth = playerHealth;
-
+      /**
+      bossEnter = GetComponent<Rigidbody2D>();
+      bossEnter.isKinematic = true;
+      //bossEnter.detectionCollisions = false;
+      bossExit = GetComponent<Rigidbody2D>();
+      bossExit.isKinematic = true;
+      //bossExit.detectionCollisions = false;
+**/
     }
 
     // Update is called once per frame
@@ -59,7 +74,7 @@ public class Character : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D collision){
-
+      Debug.Log(collision.collider.name);
         if(collision.collider.tag == "Ground"){
             grounded = true;
         }
@@ -67,6 +82,7 @@ public class Character : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Debug.Log(collision.name);
         if (collision.tag == "Respawn")
         {
             currentRespawnLocation = collision.transform;
@@ -96,6 +112,21 @@ public class Character : MonoBehaviour
               }
             }
         }
+        // might want to smooth these transitions
+        if (collision.name == "BossBegin") {
+          at_boss = true;
+          cam_follow.switchCamera(at_boss);
+          healthBar.enableBar();
+          //bossEnter.isKinematic = false;
+          //bossExit.isKinematic = false;
+        }
+        if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
+          at_boss = false;
+          cam_follow.switchCamera(at_boss);
+          healthBar.disableBar();
+          //bossEnter.isKinematic = true;
+          //bossExit.isKinematic = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision){
@@ -110,7 +141,7 @@ public class Character : MonoBehaviour
     }
     public float[] getStats() {
       float[] stat = {currentHealth, playerLives, score};
-   
+
       return stat;
     }
     void getHitByenemy()
@@ -124,9 +155,18 @@ public class Character : MonoBehaviour
     }
     void respawnPlayer()
     {
+        at_boss = false;
+        cam_follow.switchCamera(at_boss);
+        healthBar.disableBar();
         Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
         currentHealth = playerHealth;
+        //bossEnter.isKinematic = true;
+        //bossExit.isKinematic = true;
 
+    }
+
+    public bool atBoss() {
+      return at_boss;
     }
 }

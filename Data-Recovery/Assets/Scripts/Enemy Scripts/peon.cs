@@ -12,6 +12,12 @@ public class peon : enemyBehavior{
     float minDistance;
     float currentDistance;
 
+    Transform myTrans;
+    float distToGround;
+
+
+    public LayerMask groundLayer;
+
 
     void Start(){
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
@@ -22,11 +28,31 @@ public class peon : enemyBehavior{
         timeBtwShots = startTimeBtwShots;
         //fireRate = 5f;
         //nextFire = Time.time;
+        //distToGround = GetComponent<Renderer>().bounds.extents.y;
+        //myTrans = this.transform;
+        //myWidth = this.GetComponent<Renderer>().bounds.extents.x;
 
     }
 
+    void FixedUpdate() {
+      //Vector2 lineCastPos = myTrans.position - myTrans.right * myWidth;
+      //Debug.DrawLine(lineCastPos, lineCastPos + Vector2.down);
+      //bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, (float) (distToGround + 0.1));
+
+      //if (!isGrounded) {
+      //  flip();
+      //}
+    }
     void Update(){
+      //Vector2 position = transform.position;
+      //Vector2 direction = Vector2.down;
+      //float distancedown = 1.0f;
+
+        //Debug.DrawRay(position, direction, Color.green);
         float distance = Vector3.Distance(transform.position, Player.position);
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.green, 2.0f);
 
         currentDistance = gameObject.transform.position.x;
         if (currentDistance >= maxDistance && right == true)
@@ -37,6 +63,7 @@ public class peon : enemyBehavior{
         {
             flip();
         }
+
 
         if (distance >= MaxDist) {
           gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
@@ -70,6 +97,20 @@ public class peon : enemyBehavior{
           CheckIfTimeToFire();
 
         }
+    }
+
+    bool IsGrounded() {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
+
+        Debug.DrawRay(position, direction, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if (hit.collider != null) {
+            return true;
+        }
+
+        return false;
     }
 
     public void flip()

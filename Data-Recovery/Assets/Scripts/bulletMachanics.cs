@@ -7,7 +7,7 @@ public class bulletMachanics : MonoBehaviour
 
     public float travelSpeed = 20f;
     public float damage = 50f;
-    float delayTimer = 0.2f;
+    //float delayTimer = 0.2f;
 
     void Start(){
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
