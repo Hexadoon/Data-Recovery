@@ -13,7 +13,7 @@ Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player 
 
 - Installation
 - Setup
-- Features
+- Controls
 - Developers
 
 ### Installation
