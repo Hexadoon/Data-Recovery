@@ -217,6 +217,7 @@ public class Character : MonoBehaviour
         playerHealth = defaultHealth;
         scoreManager.updateHealth();
         cam_follow.lockatBoss = false;
+        cam_follow.disableCollider();
         gameObject.SetActive(true);
         //bossEnter.isKinematic = true;
         //bossExit.isKinematic = true;
