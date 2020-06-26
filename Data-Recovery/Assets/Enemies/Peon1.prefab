@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6681466163276101801
+--- !u!1 &4167617349747719872
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6681466163276101804}
-  - component: {fileID: 6681466163276101807}
-  - component: {fileID: 6681466163276101794}
-  - component: {fileID: 6681466163276101805}
-  - component: {fileID: 6681466163276101795}
+  - component: {fileID: 4167617350151254312}
+  - component: {fileID: 4167617349747719876}
+  - component: {fileID: 4167617349747719879}
+  - component: {fileID: 4167617349747719878}
+  - component: {fileID: 4167617349747719873}
   m_Layer: 8
-  m_Name: EnemyHorizontal
+  m_Name: Peon1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6681466163276101804
+--- !u!4 &4167617350151254312
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163276101801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3788967, y: 0.58461434, z: 0}
+  m_GameObject: {fileID: 4167617349747719872}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3788967, y: -2.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6681466163444635402}
+  - {fileID: 4167617351584051854}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6681466163276101807
+--- !u!212 &4167617349747719876
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163276101801}
+  m_GameObject: {fileID: 4167617349747719872}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 20fd4902992a04e4c9d92cba56b85614, type: 3}
   m_Color: {r: 1, g: 0, b: 0.007926464, a: 1}
   m_FlipX: 0
@@ -85,14 +85,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6681466163276101794
+--- !u!50 &4167617349747719879
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163276101801}
+  m_GameObject: {fileID: 4167617349747719872}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -100,19 +100,19 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!61 &6681466163276101805
+--- !u!61 &4167617349747719878
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163276101801}
+  m_GameObject: {fileID: 4167617349747719872}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -132,13 +132,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0
---- !u!114 &6681466163276101795
+--- !u!114 &4167617349747719873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163276101801}
+  m_GameObject: {fileID: 4167617349747719872}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09dd4fe01ef2b4f8581688d5b6bf1219, type: 3}
@@ -148,14 +148,17 @@ MonoBehaviour:
   playerProfile: {fileID: 0}
   health: 5
   travelSpeed: 2.5
-  MaxDist: 10
-  MinDist: 8
+  MaxDist: 6
+  MinDist: 5
   startTimeBtwShots: 2
-  spawnLocation: {fileID: 6681466163444635402}
+  spawnLocation: {fileID: 4167617351584051854}
   bulletObject: {fileID: 7956310840729624720, guid: dcc73ed6b39edc54588f53f65ef81749,
     type: 3}
-  maxDistance: 0
---- !u!1 &6681466163444635381
+  maxDistance: 8
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!1 &4167617351584051849
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,8 +166,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6681466163444635402}
-  - component: {fileID: 6681466163444635403}
+  - component: {fileID: 4167617351584051854}
+  - component: {fileID: 4167617351584051855}
   m_Layer: 8
   m_Name: bullet spawn
   m_TagString: Enemy
@@ -172,27 +175,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6681466163444635402
+--- !u!4 &4167617351584051854
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163444635381}
+  m_GameObject: {fileID: 4167617351584051849}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.87, y: 0.06, z: 0}
   m_LocalScale: {x: 0.87895, y: 0.44564, z: 1}
   m_Children: []
-  m_Father: {fileID: 6681466163276101804}
+  m_Father: {fileID: 4167617350151254312}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6681466163444635403
+--- !u!212 &4167617351584051855
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681466163444635381}
+  m_GameObject: {fileID: 4167617351584051849}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -224,9 +227,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 01eff35111f0c3e478f335eae8aa8f52, type: 3}
-  m_Color: {r: 0, g: 0.1451273, b: 1, a: 1}
+  m_Color: {r: 0.254717, g: 0.095263846, b: 0.09011214, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
