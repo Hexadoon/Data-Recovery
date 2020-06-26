@@ -54,6 +54,8 @@ public class followPlayer : MonoBehaviour
         
 
     }
+    
+    public void 
    
 
 }
