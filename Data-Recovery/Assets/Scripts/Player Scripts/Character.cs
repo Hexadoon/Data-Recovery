@@ -153,14 +153,14 @@ public class Character : MonoBehaviour
         // might want to smooth these transitions
         if (collision.name == "BossBegin") {
           at_boss = true;
-          cam_follow.switchCamera(at_boss);
+          //cam_follow.switchCamera(at_boss);
           healthBar.enableBar();
           //bossEnter.isKinematic = false;
           //bossExit.isKinematic = false;
         }
         if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
           at_boss = false;
-          cam_follow.switchCamera(at_boss);
+          //cam_follow.switchCamera(at_boss);
           healthBar.disableBar();
           //bossEnter.isKinematic = true;
           //bossExit.isKinematic = true;
@@ -200,14 +200,17 @@ public class Character : MonoBehaviour
     }
     void respawnPlayer()
     {
-
-        at_boss = false;
-        cam_follow.switchCamera(at_boss);
-        healthBar.disableBar();
+        if (at_boss)
+        {
+            at_boss = false;
+           // cam_follow.switchCamera(at_boss);
+            healthBar.disableBar();
+        }
         Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
         playerHealth = defaultHealth; 
         scoreManager.updateHealth();
+        cam_follow.lockatBoss = false;
         gameObject.SetActive(true);
         //bossEnter.isKinematic = true;
         //bossExit.isKinematic = true;
