@@ -117,6 +117,7 @@ public class Character : MonoBehaviour
 
         if (collision.tag == "Respawn")
         {
+            Debug.Log("respawnLocation Found");
             currentRespawnLocation = collision.transform;
         }
 
