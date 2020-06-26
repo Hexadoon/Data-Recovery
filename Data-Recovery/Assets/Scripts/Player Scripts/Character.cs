@@ -32,7 +32,8 @@ public class Character : MonoBehaviour
     public float respawnDelay;
 
     public HealthBar healthBar;
-    
+    public EndMenu end;
+
     //Animations
     Animator playerAnimations;
 
@@ -51,11 +52,15 @@ public class Character : MonoBehaviour
         defaultHealth = playerHealth;
         playerAnimations = gameObject.GetComponent<Animator>();
         scoreManager = gameObject.GetComponent<scoreboard>();
+        end = (EndMenu)FindObjectOfType(typeof(EndMenu));
 
     }
 
     // Update is called once per frame
     void Update(){
+        if (playerLives < 1 /* ||  player has reached the end */) {
+            end.EndGame(false);
+        }
         float movementValue = Input.GetAxis("Horizontal");
         if(pointRight && movementValue < 0){
             flip();
@@ -69,7 +74,7 @@ public class Character : MonoBehaviour
         if (horizontal != 0)
         {
             playerAnimations.SetBool("runPlayer", true);
-            
+
             playerAnimations.SetFloat("runSpeed", Mathf.Abs(Mathf.Pow(horizontal,2)));
         }
         else
@@ -84,7 +89,7 @@ public class Character : MonoBehaviour
             playerAnimations.SetTrigger("jumpPlayer");
 
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
-            
+
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -146,9 +151,9 @@ public class Character : MonoBehaviour
                 float damageOccured = projectileScript.damage;
                 Destroy(collision.gameObject);
                 getHitByenemy(damageOccured);
-                
+
             }
-            
+
         }
         // might want to smooth these transitions
         if (collision.name == "BossBegin") {
@@ -167,7 +172,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    
+
 
     private void flip(){
         pointRight = !pointRight;
@@ -183,6 +188,7 @@ public class Character : MonoBehaviour
         scoreManager.updateHealth();
         if (playerHealth <= 0)
         {
+
             gameObject.SetActive(false);
             playerLives--;
             scoreManager.updateLives();
@@ -208,7 +214,7 @@ public class Character : MonoBehaviour
         }
         Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
-        playerHealth = defaultHealth; 
+        playerHealth = defaultHealth;
         scoreManager.updateHealth();
         cam_follow.lockatBoss = false;
         gameObject.SetActive(true);
