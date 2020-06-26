@@ -7,12 +7,15 @@ public class Character : MonoBehaviour
     public LayerMask playerMask;
     scoreboard scoreManager;
 
+    public followPlayer cam_follow;
+    public boss boss;
     //movement
     public float movementSpeed = 5f;
     public float jumpForce = 5f;
     bool grounded = false;
     bool pointRight = true;
 
+    bool at_boss = false;
 
     //combat
     public int playerHealth;
@@ -28,14 +31,22 @@ public class Character : MonoBehaviour
     public Transform initialLocation;
     public float respawnDelay;
 
+    public HealthBar healthBar;
+    
     //Animations
     Animator playerAnimations;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
+        /**
+        bossEnter = GetComponent<Rigidbody2D>();
+        bossEnter.isKinematic = true;
+        //bossEnter.detectionCollisions = false;
+        bossExit = GetComponent<Rigidbody2D>();
+        bossExit.isKinematic = true;
+        //bossExit.detectionCollisions = false;
+        **/
         currentRespawnLocation = initialLocation;
         defaultHealth = playerHealth;
         playerAnimations = gameObject.GetComponent<Animator>();
@@ -84,7 +95,7 @@ public class Character : MonoBehaviour
 
         }
     }
-   
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -94,12 +105,14 @@ public class Character : MonoBehaviour
             grounded = false;
             playerAnimations.SetBool("exitJump", false);
 
+
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.tag == "Ground")
         {
             //Debug.Log("Grounded");
@@ -108,6 +121,7 @@ public class Character : MonoBehaviour
             playerAnimations.SetBool("exitJump",true);
 
         }
+
         if (collision.tag == "Respawn")
         {
             currentRespawnLocation = collision.transform;
@@ -136,6 +150,21 @@ public class Character : MonoBehaviour
             }
             
         }
+        // might want to smooth these transitions
+        if (collision.name == "BossBegin") {
+          at_boss = true;
+          //cam_follow.switchCamera(at_boss);
+          healthBar.enableBar();
+          //bossEnter.isKinematic = false;
+          //bossExit.isKinematic = false;
+        }
+        if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
+          at_boss = false;
+          //cam_follow.switchCamera(at_boss);
+          healthBar.disableBar();
+          //bossEnter.isKinematic = true;
+          //bossExit.isKinematic = true;
+        }
     }
 
     
@@ -145,7 +174,9 @@ public class Character : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+
     void getHitByenemy(float damage)
+
     {
         playerHealth -=(int) damage;
         Debug.Log(playerHealth);
@@ -169,12 +200,26 @@ public class Character : MonoBehaviour
     }
     void respawnPlayer()
     {
+        if (at_boss)
+        {
+            at_boss = false;
+           // cam_follow.switchCamera(at_boss);
+            healthBar.disableBar();
+        }
+        Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
         playerHealth = defaultHealth; 
         scoreManager.updateHealth();
-
+        cam_follow.lockatBoss = false;
+        cam_follow.disableCollider();
         gameObject.SetActive(true);
+        //bossEnter.isKinematic = true;
+        //bossExit.isKinematic = true;
+
+    }
 
 
+    public bool atBoss() {
+      return at_boss;
     }
 }

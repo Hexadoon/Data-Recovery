@@ -23,13 +23,14 @@ public abstract class enemyBehavior : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().transform;
         playerProfile = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
         Debug.Log(Player);
+
     }
 
     // Update is called once per frame
+
   
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if(collision.tag == "Bullet")
         {
             if (collision.gameObject.layer == 9){
