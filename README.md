@@ -23,8 +23,6 @@ Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player 
 
 ## Setup
 
-## Features
-
 ### Movement Controls
 
 D - Move Right
@@ -34,22 +32,6 @@ A - Move Left
 Space - Jump
 
 Left Click - Shoot
-
-### Menu
-
-- Start Menu
-
-- Pause Menu
-
-- End Menu
-
-### Enemies
-
-- Basic Enemies
-
-- Boss
-
-- Obstacles
 
 ## Developers
 
