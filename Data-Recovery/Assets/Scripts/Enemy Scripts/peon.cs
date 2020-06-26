@@ -77,7 +77,18 @@ public class peon : enemyBehavior{
         }
         else
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
+            currentDistance = gameObject.transform.position.x;
+            if (currentDistance >= maxDistance && right == true)
+            {
+                flip();
+            }
+            if (currentDistance <= minDistance && right == false)
+            {
+                flip();
+            }if(currentDistance>=minDistance && currentDistance <= maxDistance)
+            {
+                gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
+            }
         }
     }
 
