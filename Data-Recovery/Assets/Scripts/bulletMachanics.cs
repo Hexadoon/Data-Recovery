@@ -12,7 +12,7 @@ public class bulletMachanics : MonoBehaviour
     void Start(){
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * travelSpeed;
         //SDestroy(this, destroyTimer);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject,0.3f);
     }
 
     void Update(){
