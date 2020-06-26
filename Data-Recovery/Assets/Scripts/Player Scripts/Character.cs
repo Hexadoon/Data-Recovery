@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     bool grounded = false;
     bool pointRight = true;
 
-    bool at_boss = false;
+    public bool bossKilled = false;
 
     //combat
     public int playerHealth;
@@ -39,14 +39,7 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /**
-        bossEnter = GetComponent<Rigidbody2D>();
-        bossEnter.isKinematic = true;
-        //bossEnter.detectionCollisions = false;
-        bossExit = GetComponent<Rigidbody2D>();
-        bossExit.isKinematic = true;
-        //bossExit.detectionCollisions = false;
-        **/
+        
         currentRespawnLocation = initialLocation;
         defaultHealth = playerHealth;
         playerAnimations = gameObject.GetComponent<Animator>();
