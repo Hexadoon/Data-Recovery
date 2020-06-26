@@ -17,7 +17,7 @@ public class boss : enemyBehavior
     private float timeBtwRush;
 
     public float chargeSpeed;
-    public float health = 50;
+    //public float health = 50;
     public HealthBar healthBar;
     public BoxCollider2D barraier;
 

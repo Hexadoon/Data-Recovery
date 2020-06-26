@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     bool pointRight = true;
 
     public bool bossKilled = false;
+    bool at_boss = false;
 
     //combat
     public int playerHealth;
@@ -32,23 +33,30 @@ public class Character : MonoBehaviour
     public float respawnDelay;
 
     public HealthBar healthBar;
-    
+    public EndMenu end;
+
     //Animations
     Animator playerAnimations;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
         currentRespawnLocation = initialLocation;
         defaultHealth = playerHealth;
         playerAnimations = gameObject.GetComponent<Animator>();
         scoreManager = gameObject.GetComponent<scoreboard>();
+        //end = gameObject.GetComponent<EndMenu>();
+        //end = (EndMenu)FindObjectOfType(typeof(EndMenu));
+
 
     }
 
     // Update is called once per frame
     void Update(){
+      if (playerLives < 1 /* ||  player has reached the end */) {
+          end.EndGame(false);
+      }
         float movementValue = Input.GetAxis("Horizontal");
         if(pointRight && movementValue < 0){
             flip();
@@ -62,7 +70,7 @@ public class Character : MonoBehaviour
         if (horizontal != 0)
         {
             playerAnimations.SetBool("runPlayer", true);
-            
+
             playerAnimations.SetFloat("runSpeed", Mathf.Abs(Mathf.Pow(horizontal,2)));
         }
         else
@@ -77,7 +85,7 @@ public class Character : MonoBehaviour
             playerAnimations.SetTrigger("jumpPlayer");
 
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
-            
+
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -117,7 +125,6 @@ public class Character : MonoBehaviour
 
         if (collision.tag == "Respawn")
         {
-            Debug.Log("respawnLocation Found");
             currentRespawnLocation = collision.transform;
         }
 
@@ -140,20 +147,20 @@ public class Character : MonoBehaviour
                 float damageOccured = projectileScript.damage;
                 Destroy(collision.gameObject);
                 getHitByenemy(damageOccured);
-                
+
             }
-            
+
         }
         // might want to smooth these transitions
         if (collision.name == "BossBegin") {
-          //at_boss = true;
+          at_boss = true;
           //cam_follow.switchCamera(at_boss);
           healthBar.enableBar();
           //bossEnter.isKinematic = false;
           //bossExit.isKinematic = false;
         }
         if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
-          //at_boss = false;
+          at_boss = false;
           //cam_follow.switchCamera(at_boss);
           healthBar.disableBar();
           //bossEnter.isKinematic = true;
@@ -161,7 +168,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    
+
 
     private void flip(){
         pointRight = !pointRight;
@@ -194,15 +201,15 @@ public class Character : MonoBehaviour
     }
     void respawnPlayer()
     {
-        //if (at_boss)
+        if (at_boss)
         {
-           // at_boss = false;
+            at_boss = false;
            // cam_follow.switchCamera(at_boss);
             healthBar.disableBar();
         }
         Debug.Log("playerLives = " + playerLives);
         transform.position = currentRespawnLocation.position;
-        playerHealth = defaultHealth; 
+        playerHealth = defaultHealth;
         scoreManager.updateHealth();
         cam_follow.lockatBoss = false;
         cam_follow.disableCollider();
@@ -212,9 +219,9 @@ public class Character : MonoBehaviour
 
     }
 
-
+/**
     public bool atBoss() {
-        //return at_boss;
-        return false;
+      return at_boss;
     }
+    **/
 }
