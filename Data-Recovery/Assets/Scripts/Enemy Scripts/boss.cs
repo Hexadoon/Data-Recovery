@@ -7,7 +7,6 @@ public class boss : enemyBehavior
     bool goingUp = true;
     public float maxHeight;
     float minHeight;
-    float currentHeight;
     float currentHealth;
 
 
@@ -17,9 +16,10 @@ public class boss : enemyBehavior
     private float timeBtwJumps;
     private float timeBtwRush;
 
-    float chargeSpeed;
-    //public float health = 50;
+    public float chargeSpeed;
+    public float health = 50;
     public HealthBar healthBar;
+    public BoxCollider2D barraier;
 
 
     public float dropForce = 5f;
@@ -167,7 +167,7 @@ public class boss : enemyBehavior
 
     void CheckIfTimeToRush() {
       if (timeBtwRush <= 0) {
-        chargeSpeed = 5f;
+        chargeSpeed = 1f;
         transform.position = Vector2.MoveTowards(transform.position, Player.position, chargeSpeed);
         timeBtwRush = startTimeBtwRush;
       }
