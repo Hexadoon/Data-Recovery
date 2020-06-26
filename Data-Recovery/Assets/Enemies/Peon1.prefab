@@ -50,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 6681466163276101801, guid: af47967a0139696489f50a5af69986be,
         type: 3}
       propertyPath: m_Name
-      value: peon1
+      value: Peon1
       objectReference: {fileID: 0}
     - target: {fileID: 6681466163276101804, guid: af47967a0139696489f50a5af69986be,
         type: 3}

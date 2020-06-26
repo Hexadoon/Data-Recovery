@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 7acecead126ad9f48b94eebe55d6af71
+=======
+<<<<<<< Updated upstream:Data-Recovery/Assets/Enemies/EnemyHorizontal.prefab.meta
+guid: af47967a0139696489f50a5af69986be
+=======
+guid: 7acecead126ad9f48b94eebe55d6af71
+>>>>>>> Stashed changes:Data-Recovery/Assets/Enemies/Boss.prefab.meta
+>>>>>>> Stashed changes
 PrefabImporter:
   externalObjects: {}
   userData: 

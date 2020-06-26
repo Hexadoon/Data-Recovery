@@ -54,8 +54,13 @@ public class followPlayer : MonoBehaviour
         
 
     }
-    
-    public void 
+    public void disableCollider()
+    {
+        foreach (GameObject collide in bossColliders)
+        {
+            collide.SetActive(false);
+        }
+    }
    
 
 }
