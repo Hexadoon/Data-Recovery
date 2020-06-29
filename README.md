@@ -11,7 +11,7 @@ Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player 
 
 ## Table of Contents
 
-- Installation
+- [Installation] (https://github.com/Hexadoon/Data-Recovery/blob/master/README.md#installation)
 - Controls
 - Developers
 
