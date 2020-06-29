@@ -34,9 +34,12 @@ public class Character : MonoBehaviour
 
     public HealthBar healthBar;
     public EndMenu end;
+    public PauseMenu pause;
 
     //Animations
     Animator playerAnimations;
+
+    bool paused;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +49,7 @@ public class Character : MonoBehaviour
         defaultHealth = playerHealth;
         playerAnimations = gameObject.GetComponent<Animator>();
         scoreManager = gameObject.GetComponent<scoreboard>();
+        
         //end = gameObject.GetComponent<EndMenu>();
         //end = (EndMenu)FindObjectOfType(typeof(EndMenu));
 
@@ -88,7 +92,7 @@ public class Character : MonoBehaviour
 
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !PauseMenu.GameIsPaused)
         {
             bulletObject.layer = 9;
             playerAnimations.SetTrigger("aimPlayer");
@@ -123,6 +127,12 @@ public class Character : MonoBehaviour
 
         }
 
+        if(collision.tag == "Finish")
+        {
+            Debug.Log("finished");
+            end.EndGame(true);
+        }
+
         if (collision.tag == "Respawn")
         {
             currentRespawnLocation = collision.transform;
@@ -154,17 +164,11 @@ public class Character : MonoBehaviour
         // might want to smooth these transitions
         if (collision.name == "BossBegin") {
           at_boss = true;
-          //cam_follow.switchCamera(at_boss);
           healthBar.enableBar();
-          //bossEnter.isKinematic = false;
-          //bossExit.isKinematic = false;
         }
         if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
           at_boss = false;
-          //cam_follow.switchCamera(at_boss);
           healthBar.disableBar();
-          //bossEnter.isKinematic = true;
-          //bossExit.isKinematic = true;
         }
     }
 
