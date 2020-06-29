@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
 
     //combat
     public int playerHealth;
-    int defaultHealth;
+    int defaultHealth = 25;
     public float playerLives;
     public float score = 0;
     public Transform bulletSpawn;
@@ -180,8 +180,6 @@ public class Character : MonoBehaviour
             gameObject.SetActive(false);
             playerLives--;
             scoreManager.updateLives();
-
-            playerHealth = defaultHealth;
             Invoke("respawnPlayer", 2f);
         }
     }
@@ -212,9 +210,4 @@ public class Character : MonoBehaviour
 
     }
 
-
-    public bool atBoss() {
-        //return at_boss;
-        return false;
-    }
 }
