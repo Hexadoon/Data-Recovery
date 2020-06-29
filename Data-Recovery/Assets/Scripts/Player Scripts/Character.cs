@@ -162,14 +162,7 @@ public class Character : MonoBehaviour
 
         }
         // might want to smooth these transitions
-        if (collision.name == "BossBegin") {
-          at_boss = true;
-          healthBar.enableBar();
-        }
-        if (collision.name == "BossEnd" && !boss.isAlive()/* and check if boss is alive*/) {
-          at_boss = false;
-          healthBar.disableBar();
-        }
+        
     }
 
 

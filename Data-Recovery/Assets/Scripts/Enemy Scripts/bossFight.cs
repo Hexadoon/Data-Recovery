@@ -11,12 +11,17 @@ public class bossFight : enemyBehavior
     public followPlayer endfight;
     bool pointRight;
     bool moving;
+
+    public HealthBar healthStatus;
+    public GameObject bar;
     // Start is called before the first frame update
     void Start()
     {
-        health = 25;
         pointRight = false;
         moving = false;
+        healthStatus.SetMaxHealth(health);
+        healthStatus.SetHealth(health);
+
     }
 
 
@@ -91,6 +96,8 @@ public class bossFight : enemyBehavior
                 bulletMachanics projectileScript = collision.GetComponent<bulletMachanics>();
                 float damageOccured = projectileScript.damage;
                 health -= damageOccured;
+                healthStatus.SetHealth(health);
+
                 Debug.Log("Bullet Hit" + health);
 
                 Destroy(collision.gameObject);
@@ -98,6 +105,7 @@ public class bossFight : enemyBehavior
                 {
                     Destroy(gameObject);
                     endfight.bossDefeated();
+                    healthStatus.disableBar();
 
                 }
             }
