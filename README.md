@@ -6,8 +6,8 @@ You awake to find yourself in a strange, futuristic city unsure of where you are
 
 Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player must fight through different parts of a dystopian, futuristic city to gradually reveal the story. Explore the world to find new abilities to help defeat bosses and unlock access to new areas. The gameplay is inspired by shoot-em-ups of the ’90s including Mega Man and Contra. 
 
-
-- Picture of game
+- Game Screenshots can be found
+[here](https://github.com/Hexadoon/Data-Recovery/tree/master/Data-Recovery/Screenshots)
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player 
 
 ## Installation
 
-- The .exe file can be found 
+- The playable files can be found 
 [here](https://github.com/Hexadoon/Data-Recovery/tree/master/Data-Recovery/CurrentGame)
 
 ## Movement Controls
