@@ -28,7 +28,7 @@ public abstract class enemyBehavior : MonoBehaviour
 
     // Update is called once per frame
 
-  
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Bullet")
@@ -44,7 +44,7 @@ public abstract class enemyBehavior : MonoBehaviour
                 {
                     playerProfile.getKill();
                     Destroy(gameObject);
-                    
+
                 }
             }
         }
