@@ -19,7 +19,7 @@ Data Recovery is a 2D side-scrolling, level-based, shoot-em-up where the player 
 
 - The playable files can be found 
 [here](https://github.com/Hexadoon/Data-Recovery/tree/master/Data-Recovery/CurrentGame)
--Download the correct folder for your platform. Run the app in mac and the .exe file in windows to play the game.
+- Download the correct folder for your platform. Run the app in mac and the .exe file in windows to play the game.
 
 ## Movement Controls
 
